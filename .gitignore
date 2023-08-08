@@ -1,3 +1,6 @@
+# timeboard data file
+data.json
+
 # Nuxt dev/build outputs
 .output
 .nuxt
