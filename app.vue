@@ -1,5 +1,12 @@
+<script setup lang="ts">
+    const adminAccess = useState("admin", () => false)
+    
+</script>
+
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+    <div>
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </div>
 </template>

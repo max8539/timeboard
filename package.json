@@ -10,7 +10,12 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5"
+  },
+  "dependencies": {
+    "jose": "^4.14.4",
+    "jsonwebtoken": "^9.0.1"
   }
 }

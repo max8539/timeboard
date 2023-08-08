@@ -1,0 +1,9 @@
+{
+    "setup": {
+        "boardName": "Records board",
+        "ranking": "shortest",
+        "password": ""
+
+    },
+    "records": []
+}
