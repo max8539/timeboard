@@ -1,6 +1,8 @@
 <script setup lang="ts">
-    const adminAccess = useState("admin", () => false)
-    
+    const admin = useState("admin", () => false)
+    onMounted(async () => {
+        await checkAdmin()
+    })
 </script>
 
 <template>
