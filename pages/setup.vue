@@ -3,7 +3,6 @@
     const defaultPass = ref(false)
     const formState = ref("none")
    
-    
     let currentVals = {
         rankOrder: "shortest",
         boardName: "",
@@ -86,8 +85,9 @@
         <div v-else>
             <h1>Update Timeboard settings</h1>
             <form>
-                <label for="rank-order">Set ranking order</label>
-                <br>
+                <label for="rank-order">
+                    <p>Set ranking order</p>
+                </label>
                 <p>
                     Rank the
                     <select id="rank-order" v-model="rankOrder" :disabled="disableForm()">
@@ -96,14 +96,15 @@
                     </select>
                     times first.
                 </p>
-                <br>
-                <label for="board-name">Set board title</label>
-                <br>
+                <label for="board-name">
+                    <p>Set board title</p>
+                </label>
                 <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()"/>
                 <br>
                 <p>{{ boardName.length }}/30</p>
-                <label for="time-format">Set time display format</label>
-                <br>
+                <label for="time-format">
+                    <p>Set time display format</p>
+                </label>
                 <select id="time-format" v-model="timeFormat" :disabled="disableForm()">
                     <option value="ss.mss">ss.mss</option>
                     <option value="mm:ss.mss">mm:ss.mss</option>

@@ -33,11 +33,41 @@
     <h1>top.vue</h1>
     <p>admin: {{admin}}</p>
     <h1>{{ boardName }}</h1>
-    <div v-if="records.length == 0">
-        <h2>Be the first to set a time!</h2>
+    <div v-if="admin">
+        <p><NuxtLink href="/addTime">Add time</NuxtLink></p>
     </div>
-    <div v-else>
-        <p>Records display area</p>
+    <div id="top-leaderboard">
+        <div id="empty" v-if="records.length == 0">
+            <h2>Be the first to set a time!</h2>
+        </div>
+        <div v-else>
+            <div class="first-record">
+                <div class="first-rank">1</div>
+                <div class="first-name">{{ records[0].name }}</div>
+                <div class="first-time">{{ records[0].time }}</div>
+            </div>
+            <div class="second-record" v-if="records.length >= 2">
+                <div class="second-rank">2</div>
+                <div class="second-name">{{ records[1].name }}</div>
+                <div class="second-time">{{ records[1].time }}</div>
+            </div>
+            <div class="other-record" v-if="records.length >= 3">
+                <div class="other-rank">3</div>
+                <div class="other-name">{{ records[2].name }}</div>
+                <div class="other-time">{{ records[2].time }}</div>
+            </div>
+            <div class="other-record" v-if="records.length >= 4">
+                <div class="other-rank">4</div>
+                <div class="other-name">{{ records[3].name }}</div>
+                <div class="other-time">{{ records[3].time }}</div>
+            </div>
+            <div class="other-record" v-if="records.length >= 5">
+                <div class="other-rank">5</div>
+                <div class="other-name">{{ records[4].name }}</div>
+                <div class="other-time">{{ records[4].time }}</div>
+            </div>
+        </div>
     </div>
-    <p>Timebaord | <a href="https://github.com/max8539/timeboard">View source on Github</a></p>
+    
+    <p>Timebaord | <a href="https://github.com/max8539/timeboard" target="_blank" rel="noreferrer noopener">View source on Github</a></p>
 </template>

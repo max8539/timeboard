@@ -45,6 +45,7 @@ function doRankings(records: record[]) {
             } else {
                 records[i].ranking = nextRank.toString()
             }
+            playerNames.push(records[i].name)
             nextRank += 1
         }
     }
@@ -53,7 +54,7 @@ function doRankings(records: record[]) {
 
 function sortRecords(records: record[], rankOrder: string) {
     records.sort((a,b) => {
-        if (rankOrder== "longest") {
+        if (rankOrder == "longest") {
             return b.time - a.time
         } else {
             return a.time - b.time
@@ -68,17 +69,20 @@ function insertRecord(records: record[], newRecord: record, rankOrder: string) {
     if (rankOrder == "longest") {
         while (i < records.length && records[i].time >= newRecord.time) {
             result.push(records[i])
+            i += 1
         }
     } else {
         while (i < records.length && records[i].time <= newRecord.time) {
             result.push(records[i])
+            i += 1
         }
     }
     result.push(newRecord)
     while (i < records.length) {
         result.push(records[i])
+        i += 1
     }
-    return doRankings(records)
+    return doRankings(result)
 }
 
 async function setData(data: jsonData) {
@@ -170,7 +174,7 @@ export async function checkToken(token: string) {
     const setup = await getSetup()
     const secret = new TextEncoder().encode(setup.password)
     try {
-        jose.jwtVerify(token, secret, {algorithms: ["HS256"]})
+        await jose.jwtVerify(token, secret, {algorithms: ["HS256"]})
     } catch (e) {
         return false
     }
