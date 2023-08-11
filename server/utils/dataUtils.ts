@@ -154,12 +154,15 @@ export async function getSortOrder() {
 }
 
 export async function login(password: string) {
+    if (password == undefined) {
+        throw new LoginError()
+    }
     const setup = await getSetup()
     const hasher = crypto.createHash("sha256")
     const hashedPass = new TextEncoder().encode(hasher.update(password).digest("base64url"))
     const secret = new TextEncoder().encode(setup.password)
     if (!crypto.timingSafeEqual(hashedPass, secret)) {
-        throw new LoginError("Invalid login")
+        throw new LoginError()
     }
     let loginId = crypto.randomUUID()
 
@@ -182,6 +185,9 @@ export async function checkToken(token: string) {
 }
 
 export async function updateSetup(rankOrder: string, boardName: string, timeFormat: string) {
+    if (rankOrder == undefined || boardName == undefined || timeFormat == undefined) {
+        return
+    }
     let data = await getData()
     if (rankOrder != data.setup.rankOrder) {
         data.records = sortRecords(data.records, rankOrder)
@@ -193,6 +199,9 @@ export async function updateSetup(rankOrder: string, boardName: string, timeForm
 }
 
 export async function addRecord(name: string, time: number) {
+    if (name == undefined || time == undefined) {
+        return
+    }
     let data = await getData()
     let newRecord = {
         id: crypto.randomUUID(),
@@ -205,6 +214,9 @@ export async function addRecord(name: string, time: number) {
 }
 
 export async function deleteRecord(id: string) {
+    if (id == undefined) {
+        return
+    }
     let data = await getData()
     data.records = data.records.filter(r => r.id != id)
     data.records = doRankings(data.records)
@@ -212,6 +224,9 @@ export async function deleteRecord(id: string) {
 }
 
 export async function changePassword(oldPass: string, newPass: string) {
+    if (oldPass == undefined || newPass == undefined) {
+        throw new LoginError()
+    }
     await login(oldPass)
     let data = await getData()
     const hasher = crypto.createHash("sha256")

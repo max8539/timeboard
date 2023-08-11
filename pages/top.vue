@@ -30,8 +30,6 @@
     })
 </script>
 <template>
-    <h1>top.vue</h1>
-    <p>admin: {{admin}}</p>
     <h1>{{ boardName }}</h1>
     <div v-if="admin">
         <p><NuxtLink href="/addTime">Add time</NuxtLink></p>

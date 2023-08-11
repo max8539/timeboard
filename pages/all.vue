@@ -66,9 +66,6 @@
     })
 </script>
 <template>
-    <h1>all.vue</h1>
-    <p>admin: {{admin}}</p>
-
     <h1>All times</h1>
     <input type="text" v-model="search" placeholder="Search for a name..." />
     <br>

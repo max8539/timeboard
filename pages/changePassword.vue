@@ -46,7 +46,6 @@
 </script>
 <template>
     <div v-if="admin">
-        <h1>changePassword.vue</h1>
         <form>
             <label for="old-pass">Current password</label>
             <br>

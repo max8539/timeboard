@@ -39,8 +39,6 @@
 </script>
 <template>
     <div v-if="admin">
-        <h1>addTime.vue</h1>
-        <p>admin: {{ admin }}</p>
         <div v-if="defaultPass">
             <p>It appears the default password is still being used. For security reasons, you must change the password before adding a time or changing settings.</p>
             <p><NuxtLink href="/changePassword">Change timeboard password</NuxtLink></p>

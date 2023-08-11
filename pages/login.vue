@@ -25,7 +25,6 @@
     }
 </script>
 <template>
-    <h1>login.vue</h1>
     <form>
         <label for="password">Enter password:</label>
         <br>
