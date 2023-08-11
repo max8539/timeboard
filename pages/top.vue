@@ -22,7 +22,7 @@
     }
 
     onMounted(() => {
-        intervalId = setInterval(refreshData, 10000)
+        intervalId = setInterval(refreshData, 5000)
     })
 
     onUnmounted(() => {

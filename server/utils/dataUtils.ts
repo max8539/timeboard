@@ -206,7 +206,8 @@ export async function addRecord(name: string, time: number) {
 
 export async function deleteRecord(id: string) {
     let data = await getData()
-    data.records.filter(r => r.id != id)
+    data.records = data.records.filter(r => r.id != id)
+    data.records = doRankings(data.records)
     await setData(data)
 }
 
