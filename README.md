@@ -1,4 +1,4 @@
-<img src="public/logo-whitebg.png" style="display:block; margin:auto; height:80px" alt="Timeboard logo" />
+<img src="public/logo-whitebg.png" style="height:80px" alt="Timeboard logo" />
 
 # Timeboard
 A web app for storing and displaying top times at events.
