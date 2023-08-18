@@ -7,5 +7,12 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+  modules: ['@nuxtjs/google-fonts'],
+  googleFonts: {
+    families: {
+      Roboto: [400, 700]
+    },
+    download: true
   }
 })
