@@ -11,6 +11,7 @@
         hamburger.value = !hamburger.value
     }
 </script>
+
 <template>
     <div class="hidden sm:block h-12 bg-blue-950 text-white">
         <div class="grid grid-cols-[auto_1fr_1fr_1fr_1fr]" v-if="admin">
@@ -45,6 +46,7 @@
             </NuxtLink>
         </div>
     </div>
+
     <div class="block sm:hidden h-12 bg-blue-950 text-white">
         <div class="grid grid-cols-[1fr_auto]">
             <NuxtLink to="/top">
