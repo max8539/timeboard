@@ -5,6 +5,7 @@
     function toggleAdmin() {
         admin.value = false
         sessionStorage.removeItem("token")
+        navigateTo("/top")
     }
 
     function toggleHamburger() {
@@ -13,7 +14,7 @@
 </script>
 
 <template>
-    <div class="hidden sm:block h-12 bg-blue-950 text-white shadow">
+    <div class="hidden sm:block h-12 bg-blue-950 text-white drop-shadow-md">
         <div class="grid grid-cols-[auto_1fr_1fr_1fr_1fr]" v-if="admin">
             <NuxtLink to="/top">
                 <img src="logo-white.png" alt="Timeboard logo" class=" h-12 p-1 m-auto" />

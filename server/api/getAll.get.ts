@@ -6,7 +6,8 @@ export default defineEventHandler(async (e) => {
             id: r.id,
             name: r.name,
             ranking: r.ranking,
-            time: formatTime(r.time, recordsData.timeFormat)
+            time: formatTime(r.time, recordsData.timeFormat),
+            removed: r.removed
         })
     }
     return {

@@ -6,7 +6,8 @@ export type record = {
     id: string,
     ranking: string,
     name: string,
-    time: number
+    time: number,
+    removed: boolean
 }
 
 type jsonData = {
@@ -32,20 +33,22 @@ async function getData(): Promise<jsonData> {
 function doRankings(records: record[]) {
     let playerNames: string[] = []
     let nextRank = 1
-    for (let i = 0; i < records.length; i++) {
-        if (playerNames.includes(records[i].name)) {
-            records[i].ranking = "-"
+    let prevTime = NaN
+    let prevRank = " "
+    for (let r of records) {
+        if (r.removed) {
+            r.ranking = " "
+        } else if (playerNames.includes(r.name)) {
+            r.ranking = "-"
         } else {
-            if (i > 0) {
-                if (records[i].time == records[i-1].time) {
-                    records[i].ranking = records[i-1].ranking
-                } else {
-                    records[i].ranking = nextRank.toString()
-                }
+            if (r.time == prevTime) {
+                r.ranking = prevRank
             } else {
-                records[i].ranking = nextRank.toString()
+                r.ranking = nextRank.toString()
+                prevRank = r.ranking
+                prevTime = r.time
             }
-            playerNames.push(records[i].name)
+            playerNames.push(r.name)
             nextRank += 1
         }
     }
@@ -207,18 +210,37 @@ export async function addRecord(name: string, time: number) {
         id: crypto.randomUUID(),
         ranking: "",
         name: name,
-        time: time
+        time: time,
+        removed: false
     }
     data.records = insertRecord(data.records, newRecord, data.setup.rankOrder)
     await setData(data)
 }
 
-export async function deleteRecord(id: string) {
+export async function removeRecord(id: string) {
     if (id == undefined) {
         return
     }
     let data = await getData()
-    data.records = data.records.filter(r => r.id != id)
+    for (let r of data.records) {
+        if (r.id == id) {
+            r.removed = true
+        }
+    }
+    data.records = doRankings(data.records)
+    await setData(data)
+}
+
+export async function restoreRecord(id: string) {
+    if (id == undefined) {
+        return
+    }
+    let data = await getData()
+    for (let r of data.records) {
+        if (r.id == id) {
+            r.removed = false
+        }
+    }
     data.records = doRankings(data.records)
     await setData(data)
 }
@@ -241,17 +263,8 @@ export async function changePassword(oldPass: string, newPass: string) {
 }
 
 export async function reset() {
-    await init()
-    // let setup = await getSetup()
-    // let data: jsonData = {
-    //     setup: {
-    //         boardName: "Records",
-    //         ranking: "shortest",
-    //         password: setup.password
-    
-    //     },
-    //     records: []
-    // }
-    // await setData(data)
+    let data = await getData()
+    data.records = []
+    await setData(data)
 }
 

@@ -8,7 +8,8 @@ export default defineEventHandler(async (e) => {
                 id: recordsData.records[i].id,
                 name: recordsData.records[i].name,
                 ranking: recordsData.records[i].ranking,
-                time: formatTime(recordsData.records[i].time, recordsData.timeFormat)
+                time: formatTime(recordsData.records[i].time, recordsData.timeFormat),
+                removed: recordsData.records[i].removed
             })
         }
         i += 1

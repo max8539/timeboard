@@ -3,7 +3,8 @@
         id: string,
         name: string,
         ranking: string,
-        time: string
+        time: string,
+        removed: boolean
     }
 
     const admin = useState("admin")

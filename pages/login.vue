@@ -25,15 +25,13 @@
     }
 </script>
 <template>
-    <div class="w-full sm:w-[600px] m-auto p-6 text-black">
-        <h1 class="text-center text-2xl">Organiser login</h1>
+    <FormContainer>
+        <FormHeading>Organiser Login</FormHeading>
         <form>
-            <label for="password" class="block my-2">Enter password:</label>
-            <input type="password" id="password" v-model="password" :disabled="disableForm()" placeholder="Password" class="block w-full h-8 my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
-            <button type="submit" @click.prevent="submitForm" :disabled="disableForm()" class="block w-full h-8 my-2 text-center p-1 bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600">Login</button>
+            <FieldLabel for="password">Enter password:</FieldLabel>
+            <input type="password" id="password" v-model="password" :disabled="disableForm()" placeholder="Password" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
+            <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableForm()">Login</BlockButton>
         </form>
-        <div v-if="formState == 'failed' && password == ''" class="my-4 px-2 py-1 bg-red-300">
-            <p>Incorrect password. Please try again.</p>
-        </div>
-    </div>
+        <ErrorBox v-if="formState == 'failed' && password == ''">Incorrect password. Please try again.</ErrorBox>
+    </FormContainer>
 </template>

@@ -14,6 +14,31 @@
         || newPass.value != confirmPass.value
     }
 
+    function newPassInvalid() {
+        return newPass.value == "admin"
+    }
+
+    function passwordMatch() {
+        return confirmPass.value != '' && newPass.value == confirmPass.value 
+        && newPass.value != "admin" && !disableForm()
+    }
+
+    // Tailwind class overrides for certain form states
+    const newPassState = computed(() => { return {
+        'bg-blue-100': !(newPass.value == "admin" || passwordMatch()),
+        'focus-within:bg-blue-50': !(newPass.value == "admin" || passwordMatch()),
+        'bg-red-300': newPass.value == "admin", 
+        'focus:bg-red-300': newPass.value == "admin", 
+        'bg-green-300': passwordMatch(), 
+        'focus:bg-green-300': passwordMatch()
+    }})
+    const confirmPassState = computed(() => { return {
+        'bg-blue-100': !passwordMatch(),
+        'focus-within:bg-blue-50': !passwordMatch(),
+        'bg-green-300': passwordMatch(), 
+        'focus:bg-green-300': passwordMatch()
+    }})
+
     async function submitForm() {
         formState.value == "sent"
         let res = await $fetch("/api/changePassword", {method: "POST", body: {
@@ -32,7 +57,7 @@
             confirmPass.value = ""
         } else {
             sessionStorage.setItem("token", res.token)
-            formState.value = "success"
+            navigateTo("/setup")
         }
     }
 
@@ -45,38 +70,20 @@
     })
 </script>
 <template>
-    <div v-if="admin">
+    <FormContainer v-if="admin">
+        <FormHeading>Change Password</FormHeading>
         <form>
-            <label for="old-pass">Current password</label>
-            <br>
-            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()"/>
-            <br>
-            <label for="new-pass">New password</label>
-            <br>
-            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()"/>
-            <br>
-            <label for="confirm-pass">Confirm new password</label>
-            <br>
-            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()"/>
-            <br>
-            <button type="submit" @click.prevent="submitForm" :disabled="disableSubmit()">Change password</button>
+            <FieldLabel for="old-pass">Current password:</FieldLabel>
+            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+            <FieldLabel for="new-pass">New password:</FieldLabel>
+            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" :class="newPassState" />
+            <FieldLabel for="confirm-pass">Confirm password:</FieldLabel>
+            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" :class="confirmPassState" />
+            <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Change password</BlockButton>
         </form>
-        <div v-if="newPass == 'admin'">
-            <p>You cannot set the password to the default password.</p>
-        </div>
-        <div v-if="confirmPass != '' && confirmPass != newPass">
-            <p>Passwords do not match</p>
-        </div>
-        <div v-if="formState == 'failed'">
-            <p>Password could not be changed.</p>
-        </div>
-        <div v-else-if="formState == 'success'">
-            <p>Password changed.</p>
-            <NuxtLink href="/setup">Back to setup</NuxtLink>
-        </div>
-    </div>
-    <div v-else>
-        <h1>Unauthorised</h1>
-        <NuxtLink href="/top">Back to leaderboards</NuxtLink>
-    </div>
+        <ErrorBox v-if="newPass == 'admin'">You cannot set the password to the default password.</ErrorBox>
+        <ErrorBox v-else-if="confirmPass != '' && confirmPass != newPass">Passwords do not match.</ErrorBox>
+        <ErrorBox v-if="formState == 'failed' && oldPass == '' && newPass == '' && confirmPass == ''">Password could not be changed.</ErrorBox>
+    </FormContainer>
+    <Unauth v-else />
 </template>

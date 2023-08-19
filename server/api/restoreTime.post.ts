@@ -3,6 +3,6 @@ export default defineEventHandler(async (e) => {
     if (!(await checkToken(body.token))) {
         return {tokenCheck: false, success: false}
     }
-    await removeRecord(body.id)
+    await restoreRecord(body.id)
     return {tokenCheck: true, success: true}
 })

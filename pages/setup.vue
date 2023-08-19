@@ -2,6 +2,7 @@
     const admin = useState("admin")
     const defaultPass = ref(false)
     const formState = ref("none")
+    const resetMenu = ref(false)
    
     let currentVals = {
         rankOrder: "shortest",
@@ -58,74 +59,73 @@
         currentVals.timeFormet = timeFormat.value
     }
 
+    function toggleResetMenu() {
+        resetMenu.value = !resetMenu.value
+    }
+
     async function reset() {
         formState.value = "sent"
         let res = await $fetch("/api/reset", {method: "POST", body: {
             token: sessionStorage.getItem("token")
         }})
-        admin.value = false
-        sessionStorage.removeItem("token")
+        if (!res.tokenCheck) {
+            admin.value = false
+            sessionStorage.removeItem("token")
+        }
+
         if (res.success) {
             navigateTo("/top")
         }
     }
-
-    definePageMeta({
-        layout: "nav-home-only"
-    })
 </script>
+
 <template>
     <div v-if="admin">
-        <div v-if="defaultPass">
-            <p>It appears the default password is still being used. For security reasons, you must change the password before adding a time or changing settings.</p>
-            <p><NuxtLink href="/changePassword">Change timeboard password</NuxtLink></p>
-        </div>
-        <div v-else>
-            <h1>Update Timeboard settings</h1>
+        <DefaultPass v-if="defaultPass" />
+        <FormContainer v-else>
+            <FormHeading>Timeboard Settings</FormHeading>
             <form>
-                <label for="rank-order">
-                    <p>Set ranking order</p>
-                </label>
-                <p>
-                    Rank the
-                    <select id="rank-order" v-model="rankOrder" :disabled="disableForm()">
-                        <option value="shortest">shortest</option>
-                        <option value="longest">longest</option>
+                <div>
+                    <FieldLabel for="rank-order">Set ranking order:</FieldLabel>
+                    <p>
+                        Rank the
+                        <select id="rank-order" v-model="rankOrder" :disabled="disableForm()" class="span px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                            <option value="shortest">shortest</option>
+                            <option value="longest">longest</option>
+                        </select>
+                        times first.
+                    </p>
+                </div>
+                <div>
+                    <FieldLabel for="board-name">Set leaderboard title:</FieldLabel>
+                    <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+                    <!-- <p class="mb-2 text-xs text-right" :class="{'text-red-600': boardName.length > 30}">{{ boardName.length }}/30</p> -->
+                </div>
+                <div>
+                    <FieldLabel for="time-format">Set time display format</FieldLabel>
+                    <select id="time-format" v-model="timeFormat" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                        <option value="ss.mss">ss.mss</option>
+                        <option value="mm:ss.mss">mm:ss.mss</option>
+                        <option value="mm:ss">mm:ss</option>
+                        <option value="hh:mm:ss.mss">hh:mm:ss.mss</option>
+                        <option value="hh:mm:ss">hh:mm:ss</option>
                     </select>
-                    times first.
-                </p>
-                <label for="board-name">
-                    <p>Set board title</p>
-                </label>
-                <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()"/>
-                <br>
-                <p>{{ boardName.length }}/30</p>
-                <label for="time-format">
-                    <p>Set time display format</p>
-                </label>
-                <select id="time-format" v-model="timeFormat" :disabled="disableForm()">
-                    <option value="ss.mss">ss.mss</option>
-                    <option value="mm:ss.mss">mm:ss.mss</option>
-                    <option value="mm:ss">mm:ss</option>
-                    <option value="hh:mm:ss.mss">hh:mm:ss.mss</option>
-                    <option value="hh:mm:ss">hh:mm:ss</option>
-                </select>
-                <br>
-                <button type="submit" @click.prevent="submitForm" :disabled="disableSubmit()">Save changes</button>
+                </div>
+                <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Save changes</BlockButton>
             </form>
-            <div v-if="showSuccess()">
-                <p>Changes saved.</p>
-                <p><NuxtLink href="/top">Back to leaderboard</NuxtLink></p>
-            </div>
-            <div v-else></div>
-            <h1>Other timeboard actions</h1>
-            <p><NuxtLink href="/changePassword">Change admin password</NuxtLink></p>
+            <SuccessBox v-if="showSuccess()">Changes saved.</SuccessBox>
             <br>
-            <button @click="reset">Reset Timeboard</button>
-        </div>
+            <FormHeading>Other Timeboard Actions</FormHeading>
+            <NuxtLink href="/changePassword" class="block w-full my-4 text-center p-2 bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600 drop-shadow-md">Change password</NuxtLink>
+            <div v-if="resetMenu">
+                <p>You are about to clear the leaderboard and delete all times. This cannot be undone, and you cannot restore these times later. Continue?</p>
+                <div class="flex space-x-2 sm:space-x-4">
+                    <BlockButton @click="toggleResetMenu()">Cancel</BlockButton>
+                    <RedButton @click="reset()">Delete all times</RedButton>
+                </div>
+            </div>
+            <RedButton v-else @click="toggleResetMenu()">Delete all times</RedButton>
+        </FormContainer>
     </div>
-    <div v-else>
-        <h1>Unauthorised</h1>
-        <NuxtLink href="/top">Back to leaderboards</NuxtLink>
-    </div>
+    <Unauth v-else />
 </template>
