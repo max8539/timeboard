@@ -7,7 +7,8 @@
     let currentVals = {
         rankOrder: "shortest",
         boardName: "",
-        timeFormet: "mm:ss.mss"
+        timeFormet: "mm:ss.mss",
+        numShow: 5
     }
     
     let requestData = await useFetch("/api/getSetup", {method: "GET"})
@@ -15,10 +16,12 @@
         currentVals.rankOrder = requestData.data.value.rankOrder
         currentVals.boardName = requestData.data.value.boardName
         currentVals.timeFormet = requestData.data.value.timeFormat
+        currentVals.numShow = requestData.data.value.numShow
     }
     const rankOrder = ref(currentVals.rankOrder)
     const boardName = ref(currentVals.boardName)
     const timeFormat = ref(currentVals.timeFormet)
+    const numShow = ref(currentVals.numShow)
 
     let checkDefaultPass = await useFetch("/api/isDefaultPassword", {method: "GET"})
     if (checkDefaultPass.data.value != undefined && checkDefaultPass.data.value.result) {
@@ -33,7 +36,8 @@
         return disableForm() || boardName.value.length > 30 ||
         (rankOrder.value == currentVals.rankOrder &&
         boardName.value == currentVals.boardName &&
-        timeFormat.value == currentVals.timeFormet)
+        timeFormat.value == currentVals.timeFormet &&
+        numShow.value == currentVals.numShow)
     }
 
     function showSuccess() {
@@ -47,7 +51,8 @@
             token: sessionStorage.getItem("token"),
             rankOrder: rankOrder.value,
             boardName: boardName.value,
-            timeFormat: timeFormat.value
+            timeFormat: timeFormat.value,
+            numShow: numShow.value
         }})
         if (!res.tokenCheck) {
             admin.value = false
@@ -57,6 +62,7 @@
         currentVals.rankOrder = rankOrder.value
         currentVals.boardName = boardName.value
         currentVals.timeFormet = timeFormat.value
+        currentVals.numShow = numShow.value
     }
 
     function toggleResetMenu() {
@@ -84,12 +90,12 @@
         <DefaultPass v-if="defaultPass" />
         <FormContainer v-else>
             <FormHeading>Timeboard Settings</FormHeading>
-            <form>
+            <form>S
                 <div>
                     <FieldLabel for="rank-order">Set ranking order:</FieldLabel>
                     <p>
                         Rank the
-                        <select id="rank-order" v-model="rankOrder" :disabled="disableForm()" class="span px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                        <select id="rank-order" v-model="rankOrder" :disabled="disableForm()" class="span px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
                             <option value="shortest">shortest</option>
                             <option value="longest">longest</option>
                         </select>
@@ -98,12 +104,11 @@
                 </div>
                 <div>
                     <FieldLabel for="board-name">Set leaderboard title:</FieldLabel>
-                    <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
-                    <!-- <p class="mb-2 text-xs text-right" :class="{'text-red-600': boardName.length > 30}">{{ boardName.length }}/30</p> -->
+                    <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
                 </div>
                 <div>
                     <FieldLabel for="time-format">Set time display format</FieldLabel>
-                    <select id="time-format" v-model="timeFormat" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                    <select id="time-format" v-model="timeFormat" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
                         <option value="ss.mss">ss.mss</option>
                         <option value="mm:ss.mss">mm:ss.mss</option>
                         <option value="mm:ss">mm:ss</option>
@@ -111,10 +116,15 @@
                         <option value="hh:mm:ss">hh:mm:ss</option>
                     </select>
                 </div>
+                <div>
+                    <FieldLabel for="num-sho2">Set the number of times to show on the main leaderboard:</FieldLabel>
+                    <input type="number" min="1" v-model="numShow" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+                </div>
                 <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Save changes</BlockButton>
             </form>
             <SuccessBox v-if="showSuccess()">Changes saved.</SuccessBox>
             <br>
+
             <FormHeading>Other Timeboard Actions</FormHeading>
             <NuxtLink href="/changePassword" class="block w-full my-4 text-center p-2 bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600 drop-shadow-md">Change password</NuxtLink>
             <div v-if="resetMenu">
@@ -127,5 +137,6 @@
             <RedButton v-else @click="toggleResetMenu()">Delete all times</RedButton>
         </FormContainer>
     </div>
+
     <Unauth v-else />
 </template>

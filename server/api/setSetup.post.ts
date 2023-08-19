@@ -6,6 +6,6 @@ export default defineEventHandler(async (e) => {
     if (!(await checkToken(body.token))) {
         return {tokenCheck: false, success: false}
     }
-    await updateSetup(body.rankOrder, body.boardName, body.timeFormat)
+    await updateSetup(body.rankOrder, body.boardName, body.timeFormat, body.numShow)
     return {tokenCheck: true, success: true}
 })

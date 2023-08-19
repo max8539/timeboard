@@ -26,7 +26,7 @@
     // Tailwind class overrides for certain form states
     const newPassState = computed(() => { return {
         'bg-blue-100': !(newPass.value == "admin" || passwordMatch()),
-        'focus-within:bg-blue-50': !(newPass.value == "admin" || passwordMatch()),
+        'focus:bg-blue-50': !(newPass.value == "admin" || passwordMatch()),
         'bg-red-300': newPass.value == "admin", 
         'focus:bg-red-300': newPass.value == "admin", 
         'bg-green-300': passwordMatch(), 
@@ -34,7 +34,7 @@
     }})
     const confirmPassState = computed(() => { return {
         'bg-blue-100': !passwordMatch(),
-        'focus-within:bg-blue-50': !passwordMatch(),
+        'focus:bg-blue-50': !passwordMatch(),
         'bg-green-300': passwordMatch(), 
         'focus:bg-green-300': passwordMatch()
     }})
@@ -69,21 +69,23 @@
         await checkAdmin()
     })
 </script>
+
 <template>
     <FormContainer v-if="admin">
         <FormHeading>Change Password</FormHeading>
         <form>
             <FieldLabel for="old-pass">Current password:</FieldLabel>
-            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
             <FieldLabel for="new-pass">New password:</FieldLabel>
-            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" :class="newPassState" />
+            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600" :class="newPassState" />
             <FieldLabel for="confirm-pass">Confirm password:</FieldLabel>
-            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus-within:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" :class="confirmPassState" />
+            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600" :class="confirmPassState" />
             <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Change password</BlockButton>
         </form>
         <ErrorBox v-if="newPass == 'admin'">You cannot set the password to the default password.</ErrorBox>
         <ErrorBox v-else-if="confirmPass != '' && confirmPass != newPass">Passwords do not match.</ErrorBox>
         <ErrorBox v-if="formState == 'failed' && oldPass == '' && newPass == '' && confirmPass == ''">Password could not be changed.</ErrorBox>
     </FormContainer>
+
     <Unauth v-else />
 </template>

@@ -15,6 +15,7 @@ type jsonData = {
         boardName: string,
         rankOrder: string,
         timeFormat: string,
+        numShow: number,
         password: string
     },
     records: record[]
@@ -98,6 +99,7 @@ export async function init() {
             boardName: "Records",
             rankOrder: "shortest",
             timeFormat: "mm:ss.mss",
+            numShow: 5,
             password: ""
         },
         records: []
@@ -187,8 +189,8 @@ export async function checkToken(token: string) {
     return true
 }
 
-export async function updateSetup(rankOrder: string, boardName: string, timeFormat: string) {
-    if (rankOrder == undefined || boardName == undefined || timeFormat == undefined) {
+export async function updateSetup(rankOrder: string, boardName: string, timeFormat: string, numShow: number) {
+    if (rankOrder == undefined || boardName == undefined || timeFormat == undefined || numShow == undefined) {
         return
     }
     let data = await getData()
@@ -198,6 +200,7 @@ export async function updateSetup(rankOrder: string, boardName: string, timeForm
     data.setup.rankOrder = rankOrder
     data.setup.boardName = boardName
     data.setup.timeFormat = timeFormat
+    data.setup.numShow = numShow
     await setData(data)
 }
 

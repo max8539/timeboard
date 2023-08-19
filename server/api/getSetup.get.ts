@@ -4,6 +4,7 @@ export default defineEventHandler(async (e) => {
     return {
         rankOrder: setupData.rankOrder,
         boardName: setupData.boardName,
-        timeFormat: setupData.timeFormat
+        timeFormat: setupData.timeFormat,
+        numShow: setupData.numShow
     }
 })

@@ -31,9 +31,7 @@
             </button>
         </div>
         <div class="grid grid-cols-[auto_1fr_1fr_1fr]" v-else>
-            <NuxtLink to="/top">
-                <img src="logo-white.png" alt="Timeboard logo" class="h-12 p-1 m-auto" />
-            </NuxtLink>
+            <PageLogo />
             <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/top">
                 <span class="leading-[3em]">Home</span>
             </NuxtLink>
@@ -52,12 +50,12 @@
             <div class="hover:bg-blue-900 h-12">
                 <div v-if="hamburger">
                     <button class="m-0 p-0" @click="toggleHamburger()">
-                        <img src="cross.png" alt="Close menu" class="h-12 p-1 m-auto" />
+                        <img src="/cross.png" alt="Close menu" class="h-12 p-1 m-auto" />
                     </button>
                 </div>
                 <div v-else>
                     <button class="m-0 p-0" @click="toggleHamburger()">
-                        <img src="hamburger.png" alt="Open menu" class="h-12 p-1 m-auto" />
+                        <img src="/hamburger.png" alt="Open menu" class="h-12 p-1 m-auto" />
                     </button>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
     const admin = useState("admin")
     const defaultPass = ref(false)
-
     const formState = ref("none")
     const name = ref("")
     const time = ref("")
@@ -37,26 +36,18 @@
         formState.value = "success"
     }
 </script>
+
 <template>
     <div v-if="admin">
-        <div v-if="defaultPass">
-            <p>It appears the default password is still being used. For security reasons, you must change the password before adding a time or changing settings.</p>
-            <p><NuxtLink href="/changePassword">Change timeboard password</NuxtLink></p>
-        </div>
-        <div v-else>
-            <h1>Add a time</h1>
+        <DefaultPass v-if="defaultPass" />
+        <WideContainer v-else>
+            <h1 class="text-center font-bold text-2xl sm:text-4xl">Add a Time</h1>
             <form>
-                <label for="name">
-                    <p>Enter name</p>
-                </label>
-                <input type="text" id="name" v-model="name" :disabled="disableForm()" />
-                <br>
-                <p>{{ name.length }}/15</p>
-                <label for="time">
-                    <p>Enter time</p>
-                </label>
-                <input type="text" id="time" v-model="time" :disabled="disableForm()" />
-                <br>
+                <label for="name" class="font-bold sm:text-2xl">Name:</label>
+                <input type="text" id="name" maxlength="15" v-model="name" :disabled="disableForm()" class="block w-full mt-2 px-2 py-1 sm:mt-4 sm:px-4 sm:py-2 sm:text-2xl bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
+                <p class="mb-2 sm:mh-4 text-right text-xs sm:text-base" :class="{'text-red-500': name.length > 15}">{{ name.length }}/15</p>
+                <label for="time" class="font-bold sm:text-2xl">Time:</label>
+                <input type="text" id="time" v-model="time" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 sm:my-4 sm:px-4 sm:py-2 sm:text-2xl bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
                 <div v-if="time != '' && !validTime()">
                     <p>Invalid time.</p>
                 </div>
@@ -66,10 +57,8 @@
                 <p>Time added!</p>
                 <p><NuxtLink href="/top">Back to leaderboard</NuxtLink></p>
             </div>
-        </div>
+        </WideContainer>
     </div>
-    <div v-else>
-        <h1>Unauthorised</h1>
-        <NuxtLink href="/top">Back to leaderboards</NuxtLink>
-    </div>
+    
+    <Unauth v-else />
 </template>

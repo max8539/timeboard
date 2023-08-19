@@ -68,5 +68,7 @@
         </div>
     </div>
     
-    <p>Timeboard | <a href="https://github.com/max8539/timeboard" target="_blank" rel="noreferrer noopener">View source on Github</a></p>
+    <p>Timeboard | 
+        <a href="https://github.com/max8539/timeboard" target="_blank" rel="noreferrer noopener" class=" text-blue-500 underline">View source on Github</a>
+    </p>
 </template>
