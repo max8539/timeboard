@@ -2,7 +2,7 @@
 
 # Timeboard
 
-A web app for storing and displaying top times at events.
+**A web app for storing times and displaying a leaderboard at events.**
 
 This web app will make its first appearance at an event in mid-September, if not used by anyone else sooner.
 
