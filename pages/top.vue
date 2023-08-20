@@ -19,7 +19,9 @@
     let intervalId: any
 
     async function refreshData() {
-        records.value = (await $fetch("/api/getTop", {method: "GET"})).records
+        let newData = (await $fetch("/api/getTop", {method: "GET"}))
+        boardName.value = newData.boardName
+        records.value = newData.records
     }
 
     onMounted(() => {

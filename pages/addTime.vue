@@ -46,10 +46,10 @@
             <FormHeading>Add Time</FormHeading>
             <form>
                 <FieldLabel>Name:</FieldLabel>
-                <input type="text" id="name" maxlength="15" v-model="name" :disabled="disableForm()" class="block w-full mt-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
+                <input type="text" id="name" maxlength="15" v-model="name" :disabled="disableForm()" class="block w-full mt-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md"/>
                 <p class="mb-2 text-right text-xs">{{ name.length }}/15</p>
                 <FieldLabel>Time</FieldLabel>
-                <input type="text" id="time" v-model="time" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
+                <input type="text" id="time" v-model="time" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md"/>
                 <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Add time</BlockButton>
             </form>
             <ErrorBox v-if="time != '' && !validTime()" class="my-4 px-2 py-4 bg-red-300">Invalid time.</ErrorBox>

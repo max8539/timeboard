@@ -30,7 +30,7 @@
         <FormHeading>Organiser Login</FormHeading>
         <form>
             <FieldLabel for="password">Enter password:</FieldLabel>
-            <input type="password" id="password" v-model="password" :disabled="disableForm()" placeholder="Password" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
+            <input type="password" id="password" v-model="password" :disabled="disableForm()" placeholder="Password" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md"/>
             <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableForm()">Login</BlockButton>
         </form>
         <ErrorBox v-if="formState == 'failed' && password == ''">Incorrect password. Please try again.</ErrorBox>

@@ -75,11 +75,11 @@
         <FormHeading>Change Password</FormHeading>
         <form>
             <FieldLabel for="old-pass">Current password:</FieldLabel>
-            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+            <input type="password" id="old-pass" v-model="oldPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md" />
             <FieldLabel for="new-pass">New password:</FieldLabel>
-            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600" :class="newPassState" />
+            <input type="password" id="new-pass" v-model="newPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md" :class="newPassState" />
             <FieldLabel for="confirm-pass">Confirm password:</FieldLabel>
-            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600" :class="confirmPassState" />
+            <input type="password" id="confirm-pass" v-model="confirmPass" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md" :class="confirmPassState" />
             <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Change password</BlockButton>
         </form>
         <ErrorBox v-if="newPass == 'admin'">You cannot set the password to the default password.</ErrorBox>

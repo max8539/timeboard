@@ -95,7 +95,7 @@
                     <FieldLabel for="rank-order">Set ranking order:</FieldLabel>
                     <p>
                         Rank the
-                        <select id="rank-order" v-model="rankOrder" :disabled="disableForm()" class="span px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                        <select id="rank-order" v-model="rankOrder" :disabled="disableForm()" class="span px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md">
                             <option value="shortest">shortest</option>
                             <option value="longest">longest</option>
                         </select>
@@ -104,11 +104,11 @@
                 </div>
                 <div>
                     <FieldLabel for="board-name">Set leaderboard title:</FieldLabel>
-                    <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+                    <input type="text" id="board-name" v-model="boardName" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md" />
                 </div>
                 <div>
                     <FieldLabel for="time-format">Set time display format</FieldLabel>
-                    <select id="time-format" v-model="timeFormat" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600">
+                    <select id="time-format" v-model="timeFormat" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md">
                         <option value="ss.mss">ss.mss</option>
                         <option value="mm:ss.mss">mm:ss.mss</option>
                         <option value="mm:ss">mm:ss</option>
@@ -118,7 +118,7 @@
                 </div>
                 <div>
                     <FieldLabel for="num-sho2">Set the number of times to show on the main leaderboard:</FieldLabel>
-                    <input type="number" min="1" v-model="numShow" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600" />
+                    <input type="number" min="1" v-model="numShow" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600 drop-shadow-md" />
                 </div>
                 <BlockButton type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Save changes</BlockButton>
             </form>
@@ -130,7 +130,7 @@
             <RedButton @click="toggleResetMenu()" :disabled="resetMenu">Delete all times</RedButton>
             <div v-if="resetMenu">
                 <p>You are about to clear the leaderboard and delete all times that are saved on the system. This cannot be undone, and you cannot restore these times later. Continue?</p>
-                <div class="flex space-x-2 sm:space-x-4">
+                <div class="w-full flex space-x-2 sm:space-x-4">
                     <BlockButton @click="toggleResetMenu()">Cancel</BlockButton>
                     <RedButton @click="reset()">Delete all times</RedButton>
                 </div>
