@@ -115,6 +115,7 @@ export async function getRecords() {
     return {
         boardName: data.setup.boardName,
         timeFormat: data.setup.timeFormat,
+        numShow: data.setup.numShow,
         records: data.records
     }
 }
@@ -123,7 +124,7 @@ export function formatTime(seconds: number, format: string) {
     let milliseconds = seconds % 1
     let minutes = Math.floor(seconds / 60)
     let hours = Math.floor(minutes / 60)
-    let millisecondsStr = (Math.round(milliseconds * 1000)).toString().padEnd(3, "0")
+    let millisecondsStr = (Math.round(milliseconds * 1000)).toString().padStart(3, "0")
     let secondsStr = Math.floor(seconds).toString().padStart(2, "0")
     let minutesStr = Math.floor(minutes).toString().padStart(2, "0")
     let hoursStr = Math.floor(hours).toString().padStart(2, "0")

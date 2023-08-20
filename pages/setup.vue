@@ -33,7 +33,7 @@
     }
 
     function disableSubmit() {
-        return disableForm() || boardName.value.length > 30 ||
+        return disableForm() ||
         (rankOrder.value == currentVals.rankOrder &&
         boardName.value == currentVals.boardName &&
         timeFormat.value == currentVals.timeFormet &&
@@ -127,14 +127,15 @@
 
             <FormHeading>Other Timeboard Actions</FormHeading>
             <NuxtLink href="/changePassword" class="block w-full my-4 text-center p-2 bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600 drop-shadow-md">Change password</NuxtLink>
+            <RedButton @click="toggleResetMenu()" :disabled="resetMenu">Delete all times</RedButton>
             <div v-if="resetMenu">
-                <p>You are about to clear the leaderboard and delete all times. This cannot be undone, and you cannot restore these times later. Continue?</p>
+                <p>You are about to clear the leaderboard and delete all times that are saved on the system. This cannot be undone, and you cannot restore these times later. Continue?</p>
                 <div class="flex space-x-2 sm:space-x-4">
                     <BlockButton @click="toggleResetMenu()">Cancel</BlockButton>
                     <RedButton @click="reset()">Delete all times</RedButton>
                 </div>
             </div>
-            <RedButton v-else @click="toggleResetMenu()">Delete all times</RedButton>
+            
         </FormContainer>
     </div>
 

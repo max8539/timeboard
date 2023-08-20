@@ -69,6 +69,7 @@
 
 <template>
     <h1>All times</h1>
+    <NuxtLink v-if="admin" href="/addTime" class="block w-full p-1 mx-auto mb-4 text-center bg-blue-400 hover:bg-blue-300 drop-shadow-md">Add time</NuxtLink>
     <input type="text" v-model="search" placeholder="Search for a name..." />
     <br>
     <div v-if="admin">

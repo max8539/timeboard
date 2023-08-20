@@ -11,6 +11,7 @@ export default defineEventHandler(async (e) => {
         })
     }
     return {
+        boardName: recordsData.boardName,
         records: result
     }
 })

@@ -17,30 +17,16 @@
     <div class="hidden sm:block h-12 bg-blue-950 text-white drop-shadow-md">
         <div class="grid grid-cols-[auto_1fr_1fr_1fr_1fr]" v-if="admin">
             <PageLogo />
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/top">
-                <span class="leading-[3em]">Home</span>
-            </NuxtLink>
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/all">
-                <span class="leading-[3em]">All Times</span>
-            </NuxtLink>
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/setup">
-                <span class="leading-[3em]">Settings</span>
-            </NuxtLink>
-            <button class="h-12 w-full hover:bg-blue-900 text-center" @click="toggleAdmin">
-                <span class="leading-[3em]">Logout</span>
-            </button>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/all">All Times</NuxtLink>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/setup">Settings</NuxtLink>
+            <button class="block h-12 w-full p-3 hover:bg-blue-900 text-center" @click="toggleAdmin">Logout</button>
         </div>
         <div class="grid grid-cols-[auto_1fr_1fr_1fr]" v-else>
             <PageLogo />
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/top">
-                <span class="leading-[3em]">Home</span>
-            </NuxtLink>
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/all">
-                <span class="leading-[3em]">All Times</span>
-            </NuxtLink>
-            <NuxtLink class="h-12 w-full hover:bg-blue-900 text-center" to="/login">
-                <span class="leading-[3em]">Organiser Login</span>
-            </NuxtLink>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/all">All Times</NuxtLink>
+            <NuxtLink class="block h-12 w-full p-3 hover:bg-blue-900 text-center" to="/login">Login</NuxtLink>
         </div>
     </div>
 
@@ -61,31 +47,19 @@
             </div>
         </div>
     </div>
-    <div v-if="hamburger" class="w-full block bg-blue-950 text-white">
+    <div v-if="hamburger" class="w-full block sm:hidden bg-blue-950 text-white">
         <div v-if="admin">
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/top">
-                <span class="leading-[3em]">Home</span>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/all">All Times
             </NuxtLink>
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/all">
-                <span class="leading-[3em]">All Times</span>
-            </NuxtLink>
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/setup">
-                <span class="leading-[3em]">Settings</span>
-            </NuxtLink>
-            <button class="block h-12 w-full hover:bg-blue-900 text-center" @click="toggleAdmin">
-                <span class="leading-[3em]">Logout</span>
-            </button>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/setup">Settings</NuxtLink>
+            <button class="block p-2 w-full hover:bg-blue-900 text-center" @click="toggleAdmin">Logout</button>
         </div>
         <div v-else>
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/top">
-                <span class="leading-[3em]">Home</span>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/all">All Times
             </NuxtLink>
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/all">
-                <span class="leading-[3em]">All Times</span>
-            </NuxtLink>
-            <NuxtLink class="block h-12 w-full hover:bg-blue-900 text-center" to="/login">
-                <span class="leading-[3em]">Organiser Login</span>
-            </NuxtLink>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/login">Organiser Login</NuxtLink>
         </div>
     </div>
 </template>

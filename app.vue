@@ -1,5 +1,10 @@
 <script setup lang="ts">
     const admin = useState("admin", () => false)
+    const route = useRoute()
+
+    const pageBg = computed(() => {return {
+        'bg-blue-100': route.path == "/top",
+    }})
     
     useHead({
         title: "Timeboard"
@@ -11,7 +16,7 @@
 </script>
 
 <template>
-    <div class="font-sans">
+    <div class="w-full h-full font-sans" :class="pageBg">
         <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
