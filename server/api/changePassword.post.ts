@@ -5,6 +5,9 @@ export default defineEventHandler(async (e) => {
     if (!(await checkToken(body.token))) {
         return {checkToken: false, success: false, token: ""}
     }
+    if (body.newPass == 'admin') {
+        return {checkToken: true, success: false, token: ""}
+    }
     try {
         token = await changePassword(body.oldPass, body.newPass)
     } catch (e) {

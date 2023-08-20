@@ -1,7 +1,12 @@
 export default defineEventHandler(async (e) => {
+    const timeRegex = new RegExp("^([0-9]+:)?([0-9]+:)?[0-9]+(\\.[0-9]+)?$") 
+
     let body = await readBody(e)
     if (!(await checkToken(body.token))) {
         return {tokenCheck: false, success: false}
+    }
+    if (!timeRegex.test(body.time)) {
+        return {tokenCheck: true, success: false}
     }
     let timeParts = body.time.split(":")
     let seconds = 0
