@@ -4,7 +4,7 @@
 
 A web app for storing and displaying top times at events.
 
-This web app will make it's first appearance at an event in mid-September, if not used by anyone else sooner.
+This web app will make its first appearance at an event in mid-September, if not used by anyone else sooner.
 
 While the web app should work well for most small events that have a use for it, it has a security system that may be too weak for some cases. While this web app can work well as a display, I would not recommend using it as the single source of truth at events where there are significant stakes (monetary or otherwise) dependent on the times posted.
 
