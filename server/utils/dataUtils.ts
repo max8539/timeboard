@@ -128,7 +128,7 @@ export function formatTime(seconds: number, format: string) {
     let minutesStr = Math.floor(minutes).toString().padStart(2, "0")
     let hoursStr = Math.floor(hours).toString().padStart(2, "0")
     
-    if (format == "hh:mm:ss:mss" || format == "hh:mm:ss") {
+    if (format == "hh:mm:ss.mss" || format == "hh:mm:ss") {
         minutesStr = Math.floor(minutes % 60).toString().padStart(2, "0")
         secondsStr = Math.floor(seconds % 60).toString().padStart(2, "0")
     } else if (format == "mm:ss" || !(format == "ss.mss")) {
@@ -139,7 +139,7 @@ export function formatTime(seconds: number, format: string) {
         return `${secondsStr}.${millisecondsStr}`
     } else if (format == "mm:ss") {
         return `${minutesStr}:${secondsStr}`
-    } else if (format == "hh:mm:ss:mss") {
+    } else if (format == "hh:mm:ss.mss") {
         return `${hoursStr}:${minutesStr}:${secondsStr}.${millisecondsStr}`
     } else if (format == "hh:mm:ss") {
         return `${hoursStr}:${minutesStr}:${secondsStr}`

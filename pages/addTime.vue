@@ -33,7 +33,9 @@
             admin.value = false
             sessionStorage.removeItem("token")
         }
-        formState.value = "success"
+        if (res.success) {
+            navigateTo("/top")
+        }
     }
 </script>
 
@@ -48,12 +50,12 @@
                 <p class="mb-2 sm:mh-4 text-right text-xs sm:text-base" :class="{'text-red-500': name.length > 15}">{{ name.length }}/15</p>
                 <label for="time" class="font-bold sm:text-2xl">Time:</label>
                 <input type="text" id="time" v-model="time" :disabled="disableForm()" class="block w-full my-2 px-2 py-1 sm:my-4 sm:px-4 sm:py-2 sm:text-2xl bg-blue-100 focus:bg-blue-50 disabled:bg-slate-300 disabled:text-gray-600"/>
-                <div v-if="time != '' && !validTime()">
-                    <p>Invalid time.</p>
-                </div>
-                <button type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()">Add time</button>
+                <button type="submit" @click.prevent="submitForm()" :disabled="disableSubmit()" class="block w-full my-4 p-2 sm:my-8 sm:p-4 sm:text-2xl text-center  bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600 drop-shadow-md">Add time</button>
             </form>
-            <div v-if="formState == 'success'">
+            <div v-if="time != '' && !validTime()" class="my-4 px-2 py-4 sm:my-8 sm:px-4 sm:py-8 sm:text-2xl bg-red-300">
+                <p>Invalid time.</p>
+            </div>
+            <div v-if="formState == 'success'" class="my-4 px-2 py-4 sm:my-8 sm:px-4 sm:py-8 sm:text-2xl bg-green-300">
                 <p>Time added!</p>
                 <p><NuxtLink href="/top">Back to leaderboard</NuxtLink></p>
             </div>

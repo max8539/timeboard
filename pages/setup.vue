@@ -90,7 +90,7 @@
         <DefaultPass v-if="defaultPass" />
         <FormContainer v-else>
             <FormHeading>Timeboard Settings</FormHeading>
-            <form>S
+            <form>
                 <div>
                     <FieldLabel for="rank-order">Set ranking order:</FieldLabel>
                     <p>
