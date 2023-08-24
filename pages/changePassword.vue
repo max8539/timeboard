@@ -42,13 +42,13 @@
     async function submitForm() {
         formState.value == "sent"
         let res = await $fetch("/api/changePassword", {method: "POST", body: {
-            token: sessionStorage.getItem("token"),
+            token: sessionStorage.getItem("cockatoo-timeboard-token"),
             oldPass: oldPass.value,
             newPass: newPass.value
         }})
 
         if (!res.checkToken) {
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
             admin.value = false
         } else if (!res.success) {
             formState.value = "failed"
@@ -56,7 +56,7 @@
             newPass.value = ""
             confirmPass.value = ""
         } else {
-            sessionStorage.setItem("token", res.token)
+            sessionStorage.setItem("cockatoo-timeboard-token", res.token)
             navigateTo("/setup")
         }
     }

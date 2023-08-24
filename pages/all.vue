@@ -61,28 +61,26 @@
 
     async function removeTime(id: string) {
         const res = await $fetch("/api/removeTime", {method: "POST", body: {
-            token: sessionStorage.getItem("token"),
+            token: sessionStorage.getItem("cockatoo-timeboard-token"),
             id: id
         }})
         if (!res.tokenCheck) {
             admin.value = false
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
         }
         refreshData()
-        toggleManage()
     }
 
     async function restoreTime(id: string) {
         const res = await $fetch("/api/restoreTime", {method: "POST", body: {
-            token: sessionStorage.getItem("token"),
+            token: sessionStorage.getItem("cockatoo-timeboard-token"),
             id: id
         }})
         if (!res.tokenCheck) {
             admin.value = false
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
         }
         refreshData()
-        toggleManage()
     }
 
     onMounted(() => {

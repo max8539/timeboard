@@ -15,7 +15,7 @@
         formState.value = "sent"
         let res = await $fetch("/api/login", {method: "POST", body: {password: password.value}})
         if (res.success) {
-            sessionStorage.setItem("token", res.token)
+            sessionStorage.setItem("cockatoo-timeboard-token", res.token)
             admin.value = true
             navigateTo("/setup")
         } else {

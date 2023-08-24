@@ -25,13 +25,13 @@
     async function submitForm() {
         formState.value = "sent"
         let res = await $fetch("/api/addTime", {method: "POST", body: {
-            token: sessionStorage.getItem("token"),
+            token: sessionStorage.getItem("cockatoo-timeboard-token"),
             name: name.value,
             time: time.value
         }})
         if (!res.tokenCheck) {
             admin.value = false
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
         }
         if (res.success) {
             navigateTo("/all")

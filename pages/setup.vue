@@ -48,7 +48,7 @@
     async function submitForm() {
         formState.value = "sent"
         let res = await $fetch("/api/setSetup", {method: "POST", body: {
-            token: sessionStorage.getItem("token"),
+            token: sessionStorage.getItem("cockatoo-timeboard-token"),
             rankOrder: rankOrder.value,
             boardName: boardName.value,
             timeFormat: timeFormat.value,
@@ -56,7 +56,7 @@
         }})
         if (!res.tokenCheck) {
             admin.value = false
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
         }
         formState.value = "success"
         currentVals.rankOrder = rankOrder.value
@@ -72,11 +72,11 @@
     async function reset() {
         formState.value = "sent"
         let res = await $fetch("/api/reset", {method: "POST", body: {
-            token: sessionStorage.getItem("token")
+            token: sessionStorage.getItem("cockatoo-timeboard-token")
         }})
         if (!res.tokenCheck) {
             admin.value = false
-            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("cockatoo-timeboard-token")
         }
 
         if (res.success) {

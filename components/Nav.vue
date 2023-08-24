@@ -4,7 +4,7 @@
 
     function toggleAdmin() {
         admin.value = false
-        sessionStorage.removeItem("token")
+        sessionStorage.removeItem("cockatoo-timeboard-token")
         navigateTo("/top")
     }
 
