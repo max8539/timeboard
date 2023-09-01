@@ -24,17 +24,18 @@
         records.value = newData.records
     }
 
-    onMounted(() => {
-        document.body.classList.add('bg-blue-100')
-        intervalId = setInterval(refreshData, 5000)
-    })
+    // onMounted(() => {
+    //     document.body.classList.add('bg-blue-100')
+    //     intervalId = setInterval(refreshData, 5000)
+    // })
 
-    onUnmounted(() => {
-        clearInterval(intervalId)
-        document.body.classList.remove('bg-blue-100')
-    })
+    // onUnmounted(() => {
+    //     clearInterval(intervalId)
+    //     document.body.classList.remove('bg-blue-100')
+    // })
 </script>
 <template>
+    <div class="absolute top-0 left-0 w-full h-full -z-50 bg-blue-100"></div>
     <div class="w-full sm:w-[90%] m-auto px-4 py-4 md:p-5 lg:p-6 xl:p-7 2xl:p-8">
         <h1 class="py-2 font-bold text-center text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">{{ boardName }}</h1>
         <div v-if="records.length == 0" class="text-center my-4 px-4 py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 2xl:py-28 bg-blue-400 drop-shadow-md">

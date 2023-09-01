@@ -129,7 +129,7 @@
             <NuxtLink href="/changePassword" class="block w-full my-4 text-center p-2 bg-blue-400 hover:bg-blue-300 disabled:bg-slate-400 disabled:text-gray-600 drop-shadow-md">Change password</NuxtLink>
             <RedButton @click="toggleResetMenu()" :disabled="resetMenu">Delete all times</RedButton>
             <div v-if="resetMenu">
-                <p>You are about to clear the leaderboard and delete all times that are saved on the system. This cannot be undone, and you cannot restore these times later. Continue?</p>
+                <p class="text-justify">You are about to clear the leaderboard and delete all times that are saved on the system. This cannot be undone, and you cannot restore these times later. Continue?</p>
                 <div class="w-full flex space-x-2 sm:space-x-4">
                     <BlockButton @click="toggleResetMenu()">Cancel</BlockButton>
                     <RedButton @click="reset()">Delete all times</RedButton>
