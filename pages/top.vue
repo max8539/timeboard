@@ -24,16 +24,15 @@
         records.value = newData.records
     }
 
-    // onMounted(() => {
-    //     document.body.classList.add('bg-blue-100')
-    //     intervalId = setInterval(refreshData, 5000)
-    // })
+    onMounted(() => {
+        intervalId = setInterval(refreshData, 5000)
+    })
 
-    // onUnmounted(() => {
-    //     clearInterval(intervalId)
-    //     document.body.classList.remove('bg-blue-100')
-    // })
+    onUnmounted(() => {
+        clearInterval(intervalId)
+    })
 </script>
+
 <template>
     <div class="absolute top-0 left-0 w-full h-full -z-50 bg-blue-100"></div>
     <div class="w-full sm:w-[90%] m-auto px-4 py-4 md:p-5 lg:p-6 xl:p-7 2xl:p-8">
