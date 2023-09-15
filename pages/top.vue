@@ -39,6 +39,7 @@
         <h1 class="py-2 font-bold text-center text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">{{ boardName }}</h1>
         <div v-if="records.length == 0" class="text-center my-4 px-4 py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 2xl:py-28 bg-blue-400 drop-shadow-md">
             <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">Be the first to set a time!</h2>
+            <p class="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Call an organser to have your time added to the leaderboard.</p>
         </div>
         <div v-else class="max-w-full overflow-auto drop-shadow-md my-4">
             <table class="w-full">
