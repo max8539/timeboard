@@ -53,9 +53,11 @@
     function toggleManage() {
         if (manage.value) {
             manage.value = false
+            refreshData()
             intervalId = setInterval(refreshData, 20000)
         } else {
             manage.value = true
+            refreshData()
             clearInterval(intervalId)
         }
     }
