@@ -5,7 +5,7 @@
     function toggleAdmin() {
         admin.value = false
         sessionStorage.removeItem("cockatoo-timeboard-token")
-        navigateTo("/top")
+        navigateTo("/")
     }
 
     function toggleHamburger() {
@@ -17,14 +17,14 @@
     <div class="hidden sm:block h-12 bg-blue-950 text-white drop-shadow-xl">
         <div class="grid grid-cols-[auto_1fr_1fr_1fr_1fr]" v-if="admin">
             <PageLogo />
-            <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/">Home</NuxtLink>
             <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/all">All Times</NuxtLink>
             <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/setup">Settings</NuxtLink>
             <button class="block h-12 w-full py-3 hover:bg-blue-900 text-center" @click="toggleAdmin">Logout</button>
         </div>
         <div class="grid grid-cols-[auto_1fr_1fr_1fr]" v-else>
             <PageLogo />
-            <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/">Home</NuxtLink>
             <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/all">All Times</NuxtLink>
             <NuxtLink class="block h-12 w-full py-3 hover:bg-blue-900 text-center" to="/login">Organiser Login</NuxtLink>
         </div>
@@ -51,14 +51,14 @@
     </div>
     <div v-if="hamburger" class="w-full block sm:hidden bg-blue-950 text-white drop-shadow-xl">
         <div v-if="admin">
-            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/">Home</NuxtLink>
             <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/all">All Times
             </NuxtLink>
             <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/setup">Settings</NuxtLink>
             <button class="block p-2 w-full hover:bg-blue-900 text-center" @click="toggleAdmin">Logout</button>
         </div>
         <div v-else>
-            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/top">Home</NuxtLink>
+            <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/">Home</NuxtLink>
             <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/all">All Times
             </NuxtLink>
             <NuxtLink class="block p-2 w-full hover:bg-blue-900 text-center" to="/login">Organiser Login</NuxtLink>

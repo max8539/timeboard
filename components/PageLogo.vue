@@ -8,7 +8,7 @@
     Please do not commit your logo changes to the Timeboard repository.
 -->
 <template>
-    <NuxtLink to="/top">
+    <NuxtLink to="/">
         <img src="/logo-white.png" alt="Timeboard logo" class="inline h-12 p-1" />
     </NuxtLink>
 </template>
