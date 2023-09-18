@@ -7,21 +7,20 @@
         removed: boolean
     }
 
-    const admin = useState("admin")
-    const initialData = (await useFetch("/api/getTop", {method: "GET"})).data
+    const { data, refresh } = await useFetch("/api/getTop", {method: "GET"})
     const boardName = ref("Records")
     const records = ref<clientSideRecord[]>([])
-    if (initialData.value != undefined) {
-        boardName.value = initialData.value.boardName
-        records.value = initialData.value.records
+    if (data.value != undefined) {
+        boardName.value = data.value.boardName
+        records.value = data.value.records
     }
 
     let intervalId: any
 
     async function refreshData() {
-        let newData = (await $fetch("/api/getTop", {method: "GET"}))
-        boardName.value = newData.boardName
-        records.value = newData.records
+        await refresh()
+        boardName.value = data.value?.boardName || boardName.value
+        records.value = data.value?.records || records.value
     }
 
     onMounted(() => {

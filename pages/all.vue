@@ -14,10 +14,10 @@
     const allRecords = ref<clientSideRecord[]>([])
     let intervalId: any
 
-    const initialData = (await useFetch("/api/getAll", {method: "GET"})).data
-    if (initialData.value != undefined) {
-        allRecords.value = initialData.value.records
-        boardName.value = initialData.value.boardName
+    const { data, refresh } = await useFetch("/api/getAll", {method: "GET"})
+    if (data.value != undefined) {
+        allRecords.value = data.value.records
+        boardName.value = data.value.boardName
     }
     
     const searchRecords = computed (() => {
@@ -44,9 +44,9 @@
     })
 
     async function refreshData() {
-        let newData = (await $fetch("/api/getAll", {method: "GET"}))
-        boardName.value = newData.boardName
-        allRecords.value = newData.records
+        await refresh()
+        boardName.value = data.value?.boardName || boardName.value
+        allRecords.value = data.value?.records || allRecords.value
     }
 
     function toggleManage() {
