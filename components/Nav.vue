@@ -38,12 +38,14 @@
             <div class="hover:bg-blue-900 h-12">
                 <div v-if="hamburger">
                     <button class="m-0 p-0" @click="toggleHamburger()">
-                        <img src="/cross.png" alt="Close menu" class="h-12 p-1 m-auto" />
+                        <NuxtImg src="/cross.png" alt="Close menu" height="40px" densities="x1 x2" class="h-12 p-1 m-auto" />
+                        <!-- <img src="/cross.png" alt="Close menu" class="h-12 p-1 m-auto" /> -->
                     </button>
                 </div>
                 <div v-else>
                     <button class="m-0 p-0" @click="toggleHamburger()">
-                        <img src="/hamburger.png" alt="Open menu" class="h-12 p-1 m-auto" />
+                        <NuxtImg src="/hamburger.png" alt="Open menu" height="40px" densities="x1 x2" class="h-12 p-1 m-auto" />
+                        <!-- <img src="/hamburger.png" alt="Open menu" class="h-12 p-1 m-auto" /> -->
                     </button>
                 </div>
             </div>

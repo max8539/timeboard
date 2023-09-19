@@ -7,7 +7,7 @@
         removed: boolean
     }
     
-    const admin = useState("admin")
+    const admin = useState<boolean>("admin")
     const search = ref("")
     const manage = ref(false)
     const boardName = ref("Records")

@@ -8,7 +8,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@nuxtjs/google-fonts'],
+  modules: [
+    '@nuxtjs/google-fonts',
+    '@nuxt/image'
+  ],
   googleFonts: {
     families: {
       Roboto: [400, 700]

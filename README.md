@@ -4,11 +4,11 @@
 
 **A web app for storing times and displaying a leaderboard at events.**
 
-While the web app should work well for most small events that have a use for it, it has a security system that may be too weak for some cases. While this web app can work well as a display, I would not recommend using it as the single source of truth at events where there are significant stakes (monetary or otherwise) dependent on the times posted.
-
 ## Technologies used
 
 [Vue.js](https://vuejs.org) | [TypeScript](https://www.typescriptlang.org) | [Nuxt](https://nuxt.com) | [Tailwind CSS](https://tailwindcss.com)
+
+**This web app currently uses the release candidate version of [nuxt/image](https://image.nuxt.com), and will receive updates as it progresses towards a stable release.** If you are experiencing issues with images on the web app during deployment, or otherwise wish to opt out of this, you may wish to check out the `safe-img` branch.
 
 
 ## Deploying the web app

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    const admin = useState("admin")
+    const admin = useState<boolean>("admin")
     const defaultPass = ref(false)
     const formState = ref("none")
     const name = ref("")

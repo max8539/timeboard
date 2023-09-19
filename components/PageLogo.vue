@@ -9,6 +9,7 @@
 -->
 <template>
     <NuxtLink to="/">
-        <img src="/logo-white.png" alt="Timeboard logo" class="inline h-12 p-1" />
+        <NuxtImg src="/logo-white.png" alt="Timeboard logo" height="40px" densities="x1 x2" class="inline h-12 p-1" />
+        <!-- <img src="/logo-white.png" alt="Timeboard logo" class="inline h-12 p-1" /> -->
     </NuxtLink>
 </template>
